@@ -6,7 +6,7 @@
 
 Companion repository for *Loop Engineering for AI Agents* by Enrico Papalini, published by Packt. The book was developed under the working title *Non-Deterministic Loop Engineering*; older asset names and manuscript references may still use that title.
 
-Loop engineering is the design of a system that turns an objective into bounded, verifiable work: select a task, supply context, act, check the result, retain useful state, and decide whether to continue, stop, or ask a human. This repository supplies the book's figures, equations, illustrative listings, and a runnable chapter 6 reference script. It is **not** a reproduction of third-party experiments or a production agent framework.
+Loop engineering is the design of a system that turns an objective into bounded, verifiable work: select a task, supply context, act, check the result, retain useful state, and decide whether to continue, stop, or ask a human. This repository supplies the book's figures, equations, illustrative listings, and runnable chapter 4 and chapter 6 reference scripts. It is **not** a reproduction of third-party experiments or a production agent framework.
 
 **Quick links:** [Runnable source code (`src/`)](src/) · [Book bibliography (clickable citations)](BIBLIOGRAPHY.md) · [Original numbered listings (`Code/`)](Code/)
 
@@ -17,13 +17,13 @@ Loop engineering is the design of a system that turns an objective into bounded,
 | 1 | Foundations and critical assessment | [Figures](imgs/cph1/) · [Equations](Equations/equation_1_1.tex) |
 | 2 | The organization becomes a loop | [Figures](imgs/cph3/) · [Equation](Equations/equation_2_1.tex) |
 | 3 | Economics of loop engineering | [Figures](imgs/cph4/) · [Equations](Equations/equation_3_1.tex) |
-| 4 | The Ralph loop | [Figures](imgs/cph2/) · [Listings 001–019](Code/) |
+| 4 | The Ralph loop | [Figures](imgs/cph2/) · [Listings 001–019](Code/) · [Working controller](src/ralph_loop.py) |
 | 5 | Building a full local AI loop | [Figures](imgs/cph5/) · [Equations](Equations/equation_5_1.tex) · [Listings 020–041](Code/) |
 | 6 | Choosing the right loop | [Figures](imgs/cph6/) · [Equations](Equations/equation_6_1.tex) · [Listings 042–060](Code/) |
 
 The listing numbers follow reading order across the book. For a fuller description of the folders, naming conventions, and the chapter 6 image-path discrepancy, see the [asset guide](docs/asset-guide.md).
 
-The [bibliography](BIBLIOGRAPHY.md) follows the manuscript's chapter order and links each cited work to its source. The [source directory](src/) contains the executable chapter 6 implementation and example tasks; the numbered [book listings](Code/) are reference excerpts, not that runnable program.
+The [bibliography](BIBLIOGRAPHY.md) follows the manuscript's chapter order and links each cited work to its source. The [source directory](src/) contains executable chapter 4 and chapter 6 implementations and example tasks; the numbered [book listings](Code/) are reference excerpts, not complete runnable programs.
 
 ## How to use this repository
 
@@ -32,6 +32,28 @@ The [bibliography](BIBLIOGRAPHY.md) follows the manuscript's chapter order and l
 3. Use the figures as visual references and the equations as LaTeX source. File paths remain close to the publisher's numbered/source-asset convention to keep cross-references stable.
 
 The assets have no install step. For a local consistency check, run `bash scripts/check-assets.sh` from the repository root.
+
+## Run the chapter 4 Ralph loop
+
+The [Python controller](src/ralph_loop.py) and [Bash launcher](src/ralph.sh) require Python 3.10+ and only the standard library. Run the offline demonstration with either entry point:
+
+```bash
+python3 src/ralph_loop.py --demo
+bash src/ralph.sh --demo
+```
+
+The demo starts a new worker process for each of two plan items, persists JSON state between runs, and accepts completion only after separate scope and final checks pass. The deterministic [demo worker](src/ralph_demo_worker.py) uses no model or credentials. For your own project, copy the [prompt template](src/ralph_prompt.md) and [state example](src/ralph_state.example.json), supply a worker executable that reads its prompt on standard input, and provide executable scope and final verifier programs owned outside the worker's writable area:
+
+```bash
+bash src/ralph.sh --workspace /path/to/project \
+  --prompt /path/to/ralph_prompt.md --state /path/to/project/tasks/state.json \
+  --worker /path/to/worker \
+  --scope-verifier /path/to/protected/verify_scope.sh \
+  --final-verifier /path/to/protected/verify_final.sh \
+  --max-iterations 10 --timeout 300
+```
+
+The state file must be inside the worker workspace; the prompt and verifiers must be outside it. The controller enforces at most one completed item per iteration, a per-worker timeout, an iteration limit, and unchanged prompt/verifier files. Worker prose or a completion promise alone never stops it. Verifiers must implement real project checks; the controller does not invent them, sandbox the worker, or automatically commit, push, or merge. Run an unattended worker only in an isolated environment with narrowly scoped credentials. The older *ai-auto_eng* Ralph appendix informed the mechanics; the current chapter's structured-state and controller-owned verification rules govern this implementation.
 
 ## Run the chapter 6 loop
 
