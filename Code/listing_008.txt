@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+MAX_ITERATIONS="${1:-25}"
+ITERATION_TIMEOUT="${ITERATION_TIMEOUT:-1800}"
+STATE_FILE="${STATE_FILE:-tasks/state.json}"
+
+# Fixed executable interfaces: no eval, no agent-supplied command.
+FINAL_VERIFIER="$ROOT/scripts/verify_final.sh"
+SCOPE_VERIFIER="$ROOT/scripts/verify_scope.sh"
+CLI=(claude --dangerously-skip-permissions --print)
+
+cd "$ROOT" || exit 1
+test -x "$FINAL_VERIFIER" || { echo "Missing final verifier"; exit 2; }
+test -x "$SCOPE_VERIFIER" || { echo "Missing scope verifier"; exit 2; }
+command -v jq >/dev/null || { echo "jq is required"; exit 2; }
+
+for ((i=1; i<=MAX_ITERATIONS; i++)); do
+    echo "Ralph iteration $i of $MAX_ITERATIONS"
+
+    if command -v timeout >/dev/null 2>&1; then
+        timeout "$ITERATION_TIMEOUT" \
+            "${CLI[@]}" < "$ROOT/CLAUDE.md"
+        STATUS=$?
+    else
+        "${CLI[@]}" < "$ROOT/CLAUDE.md"
+        STATUS=$?
+    fi
+
+    if [ "$STATUS" -ne 0 ]; then
+        echo "Worker exited with status $STATUS."
+        echo "Persistent state is preserved for inspection or resume."
+        continue
+    fi
+
+    # The worker may update state, but state alone is not proof.
+    if ! jq -e '
+        .schema_version == 1 and
+        .status == "complete" and
+        .open_items == 0
+    ' "$STATE_FILE" >/dev/null; then
+        continue
+    fi
+
+    # Controller-owned checks are the acceptance authority.
+    "$SCOPE_VERIFIER" || {
+        echo "Unauthorized or unrelated changes detected."
+        exit 3
+    }
+
+    "$FINAL_VERIFIER" || {
+        echo "Completion claimed, but protected evidence failed."
+        continue
+    }
+
+    echo "All planned work passed state, scope, and final evidence gates."
+    exit 0
+done
+
+echo "Iteration budget exhausted; escalating with preserved evidence."
+exit 1

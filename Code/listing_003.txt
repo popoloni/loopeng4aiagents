@@ -1,0 +1,5 @@
+- [ ] Add authentication middleware
+  - Verify JWT on every /api/* request
+  - Return 401 JSON response on failure
+  - Cover valid, expired, missing, and malformed tokens
+  - Quality gate: npm test && npm run typecheck

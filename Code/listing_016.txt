@@ -1,0 +1,7 @@
+# Agent Lessons
+
+## Lesson 0 -- Read Persistent State First
+**What happened**: Bootstrap rule.
+**Root cause**: A fresh context has no memory of previous sessions.
+**Rule**: Read this file before selecting or implementing any task.
+**Date**: 2026-07-16

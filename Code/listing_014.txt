@@ -1,0 +1,6 @@
+mkdir -p specs tasks scripts/ralph
+touch AGENTS.md
+touch tasks/fix_plan.md tasks/lessons.md tasks/todo.md
+touch tasks/ralph_prompt.md
+touch scripts/ralph/CLAUDE.md scripts/ralph/ralph.sh
+chmod +x scripts/ralph/ralph.sh

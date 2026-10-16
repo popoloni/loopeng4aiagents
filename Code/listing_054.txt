@@ -1,0 +1,8 @@
+def route_dependency_update(update):
+    safe_to_apply = (
+        update["tier"] == "patch"
+        and update.get("severity") != "high"
+        and not update.get("denylisted", False)
+        and update.get("green", False)
+    )
+    return "auto_apply" if safe_to_apply else "human_review"

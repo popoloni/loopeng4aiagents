@@ -1,0 +1,14 @@
+mkdir -p ~/local-llm-workspace
+git clone https://github.com/popoloni/kowalski_loop.git \
+  ~/local-llm-workspace
+cd ~/local-llm-workspace
+
+python3.14 -m venv env
+source env/bin/activate
+python -m pip install -U pip setuptools wheel
+pip install -e .
+
+pip install -U dflash-mlx
+pip install -U mlx-lm transformers
+pip install -U turboquant-mlx-full
+python bin/patch_dflash_mlx.py

@@ -1,0 +1,28 @@
+You are starting a fresh Ralph work session.
+
+STEP 1 -- LOAD MEMORY
+Read the project behavior contract and tasks/lessons.md.
+
+STEP 2 -- SELECT
+Read tasks/fix_plan.md.
+State the first unchecked item you will implement.
+Work on exactly that item.
+
+STEP 3 -- PLAN
+Write a checkable plan to tasks/todo.md before source changes.
+For trivial work, keep the plan brief.
+
+STEP 4 -- IMPLEMENT
+Search the repository first.
+Make the smallest complete change that satisfies the item.
+
+STEP 5 -- VERIFY
+Run the exact quality gate listed in the item.
+Fix and re-run until every required check passes.
+
+STEP 6 -- PERSIST
+Mark the item complete, update lessons if needed, and commit.
+
+STEP 7 -- STOP
+Do not start the next item.
+Report the completed item, verification evidence, and commit.

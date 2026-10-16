@@ -1,0 +1,11 @@
+{
+  "id": "task_02",
+  "prompt": "Fix tokenize() so repeated separators do not emit empty tokens.",
+  "file": "src/tokenizer.py",
+  "mode": "agent",
+  "context": ["tests/test_tokenizer.py"],
+  "verify": "pytest -q tests/test_tokenizer.py",
+  "expect": ["def tokenize"],
+  "require_change": true,
+  "status": "pending"
+}

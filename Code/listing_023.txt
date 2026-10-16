@@ -1,0 +1,8 @@
+/bin/bash -c "$(curl -fsSL \
+  https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install python@3.14 python@3.13 node@22 hf
+brew update
+brew reinstall node@22
+brew link --overwrite node@22
+node --version

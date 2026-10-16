@@ -1,0 +1,2 @@
+cd ~/local-llm-workspace
+python -m llmstack.cli init

@@ -1,0 +1,4 @@
+python -m llmstack.cli serve dflash-qwen35b-moe --watchdog
+python -m llmstack.cli proxy
+python -m llmstack.cli interactive
+python -m llmstack.cli dashboard

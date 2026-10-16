@@ -1,0 +1,9 @@
+## Session Start -- Do This First
+
+Before touching code:
+1. Read tasks/lessons.md completely
+2. Read tasks/fix_plan.md
+3. Identify the first unchecked item
+4. Read its related specifications and tests
+5. Inspect git status
+6. Only then plan and implement

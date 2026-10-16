@@ -1,0 +1,2 @@
+python -m llmstack.cli model preset stable
+python -m llmstack.cli model preset safest --restart

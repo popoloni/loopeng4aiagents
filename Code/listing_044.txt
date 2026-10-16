@@ -1,0 +1,15 @@
+def build_context_prompt(question, schema, examples=()):
+    parts = []
+    if examples:
+        rendered = "\n\n".join(
+            f"Schema: {ex['schema']}\nQuestion: {ex['question']}\n"
+            f"Answer: {ex['answer']}"
+            for ex in examples
+        )
+        parts.append(f"Examples:\n{rendered}")
+
+    parts.append(
+        "Use only fields present in this schema:\n"
+        f"{schema}\n\nQuestion: {question}"
+    )
+    return "\n\n".join(parts)

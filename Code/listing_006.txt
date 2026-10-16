@@ -1,0 +1,3 @@
+Before making changes, search the repository and inspect related
+tests. Do not infer absence from a single unsuccessful search.
+Prefer extending existing code over creating a parallel implementation.

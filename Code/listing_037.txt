@@ -1,0 +1,14 @@
+def choose_executor(task):
+    if task.get("mode") != "direct":
+        return "agent"              # unset mode and mode="agent"
+
+    if task.get("strategy") == "edit":
+        return "agent"              # explicit escape hatch
+    if task.get("strategy") == "rewrite":
+        return "direct"
+
+    if task["file"] in task.get("context", []):
+        if current_size(task["file"]) > size_threshold_bytes:
+            return "agent"          # avoid unsafe one-shot regeneration
+
+    return "direct"

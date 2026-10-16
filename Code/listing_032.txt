@@ -1,0 +1,20 @@
+{
+  "active_model": "dflash-qwen35b-moe",
+  "models": {
+    "dflash-qwen35b-moe": {
+      "type": "dflash",
+      "target": "mlx-community/Qwen3.6-35B-A3B-4bit",
+      "draft": "z-lab/Qwen3.6-35B-A3B-DFlash",
+      "cache_max_bytes": "12GB",
+      "max_snapshot_tokens": 32000
+    },
+    "mlx-gemma4-12b": {
+      "type": "mlx",
+      "target": "mlx-community/gemma-4-12b-coder-4bit"
+    },
+    "turboquant-qwen35b-moe": {
+      "type": "turboquant",
+      "target": "example/Qwen3.6-35B-A3B-tq3"
+    }
+  }
+}

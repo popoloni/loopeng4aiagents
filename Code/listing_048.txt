@@ -1,0 +1,19 @@
+def run_coordinated(loops):
+    owned_by = {}
+    actions = []
+    yielded = []
+
+    for loop in sorted(loops, key=lambda item: item["priority"]):
+        for target in loop["queue"]:
+            if target in owned_by:
+                yielded.append({
+                    "loop": loop["name"],
+                    "target": target,
+                    "owner": owned_by[target],
+                })
+                continue
+            owned_by[target] = loop["name"]
+            actions.append((loop["name"], target))
+
+    return {"actions": actions, "yielded": yielded,
+            "collisions": 0, "owned_by": owned_by}

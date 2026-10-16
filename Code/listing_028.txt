@@ -1,0 +1,2 @@
+hf download mlx-community/Qwen3.6-35B-A3B-4bit
+hf download z-lab/Qwen3.6-35B-A3B-DFlash

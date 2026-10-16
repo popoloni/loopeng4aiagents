@@ -1,0 +1,21 @@
+def projected_daily_tokens(cadence_minutes, outcome_mix, token_cost):
+    runs = (24 * 60) // cadence_minutes
+    per_run = sum(
+        outcome_mix[name] * token_cost[name]
+        for name in ("noop", "report", "action")
+    )
+    return {"runs_per_day": runs, "tokens_per_run": per_run,
+            "tokens_per_day": runs * per_run}
+
+
+def pareto_frontier(strategies):
+    """Keep strategies not beaten on both cost and quality."""
+    return [
+        candidate for candidate in strategies
+        if not any(
+            other["tokens"] <= candidate["tokens"]
+            and other["quality"] >= candidate["quality"]
+            and other != candidate
+            for other in strategies
+        )
+    ]

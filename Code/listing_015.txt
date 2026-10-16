@@ -1,0 +1,33 @@
+# Project Agent Contract
+
+## Session Start
+1. Read tasks/lessons.md
+2. Read tasks/fix_plan.md
+3. Read the relevant specifications and tests
+4. Inspect git status
+5. Select exactly one item
+
+## Implementation Rules
+- Search before creating new code
+- Prefer existing patterns and abstractions
+- Write complete implementations, not placeholders
+- Avoid unrelated refactoring
+- Keep the task boundary narrow
+
+## Verification
+Use only the exact project commands below:
+- Type check: npm run typecheck
+- Lint: npm run lint
+- Test: npm test
+
+All required checks must pass before a commit.
+
+## Persistence
+- Update tasks/todo.md during the session
+- Mark the selected item complete only after verification
+- Add specific durable discoveries to tasks/lessons.md
+- Commit one item per iteration
+
+## Stop
+After the current item is committed, stop.
+Do not start the next item in the same context.

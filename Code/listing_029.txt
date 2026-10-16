@@ -1,0 +1,16 @@
+cd ~/local-llm-workspace
+
+# Terminal 1: one inference backend
+bash bin/start_dflash_server.bash
+# Alternatives:
+# bash bin/start_mlx_server.bash
+# bash bin/start_turboquant_server.bash
+
+# Terminal 2: context-compression proxy
+bash bin/start_headroom_server.bash
+
+# Terminal 3: attended local coding session
+bash bin/launch_ccr.bash
+
+# Terminal 4: optional live dashboard
+bash bin/launch_dashboard.bash

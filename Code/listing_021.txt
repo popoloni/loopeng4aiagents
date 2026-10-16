@@ -1,0 +1,20 @@
+task = mode.next_task()
+while task is not None:
+    executor = choose_executor(task)
+    strategy = resolve_loop_strategy(plan, task)
+
+    while strategy.permits_another_attempt():
+        outcome = execute(task, executor)
+        if outcome == "OK":
+            outcome = verify_then_authorize(task, strategy)
+        decision = mode.on_result(task, outcome, current_state())
+        if decision.done:
+            break
+
+    if not decision.done:
+        mode.on_incomplete(task, executor)
+        log_run(task, decision)
+        halt_for_human_review()
+
+    log_run(task, decision)
+    task = mode.next_task()

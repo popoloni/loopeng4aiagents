@@ -1,0 +1,19 @@
+def choose_controls(problem):
+    controls = ["budget", "observability"]
+
+    if not problem["independently_verifiable"]:
+        return ["refine_specification_or_human_review"]
+    if problem.get("missing_stable_context"):
+        controls.append("skill")
+    if problem.get("missing_historical_fact"):
+        controls.append("retrieval")
+    if problem.get("needs_exact_operation"):
+        controls.append("tool")
+    if problem.get("false_acceptance_cost", 0) > 0.5:
+        controls.append("maker_checker")
+    if problem.get("concurrent_writers", 1) > 1:
+        controls.extend(["worktree", "ownership_registry"])
+    if problem.get("material_side_effect"):
+        controls.append("authorization_guardrail")
+
+    return list(dict.fromkeys(controls))

@@ -1,0 +1,37 @@
+# Ralph Loop Instructions
+
+You are running inside an autonomous loop.
+Complete exactly ONE plan item in this iteration.
+
+## Orientation
+1. Read AGENTS.md
+2. Read tasks/lessons.md
+3. Read specs/*
+4. Read tasks/state.json and tasks/fix_plan.md
+5. Inspect git status and related existing code
+
+## Task Selection
+Choose the first highest-priority pending item.
+Record its identifier before changing files.
+
+## Implementation
+- Search before coding
+- Extend existing code instead of duplicating it
+- Produce a complete implementation, never a placeholder
+- Avoid unrelated refactoring
+- Do not modify controller-owned verifier or policy files
+
+## Verification
+Run the item-level checks available to the worker.
+Treat their result as evidence for the controller, not final acceptance.
+
+## Persistence
+When the item is ready:
+- update the structured task state
+- record durable discoveries in tasks/lessons.md
+- stage only files belonging to the selected item
+- commit with a descriptive message
+
+## Stop
+Do not begin another item in this process.
+Return a concise status and terminate.

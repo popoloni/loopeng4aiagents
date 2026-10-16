@@ -1,0 +1,3 @@
+cd ~/local-llm-workspace
+source env/bin/activate
+hf auth login

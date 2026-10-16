@@ -1,0 +1,36 @@
+import numpy as np
+
+
+def duplicate_candidates(query_index, normalized_embeddings, top_k=10):
+    scores = normalized_embeddings @ normalized_embeddings[query_index]
+    scores[query_index] = -np.inf
+    order = np.argsort(-scores)[:top_k]
+    return [(int(i), float(scores[i])) for i in order]
+
+
+def pr_babysitter(problem, refine, executable_verify):
+    candidate = refine(problem)
+    ready = bool(executable_verify(problem, candidate))
+    return {"proposal": "ready_to_merge" if ready else "needs_work",
+            "human_still_merges": True, "candidate": candidate}
+
+
+def semantic_debt_queue(comments, debt_examples, embed, top_k=20):
+    reference = np.asarray(embed(debt_examples), dtype=np.float32)
+    prototype = reference.mean(axis=0)
+    prototype /= max(np.linalg.norm(prototype), 1e-12)
+    vectors = np.asarray(embed(comments), dtype=np.float32)
+    vectors /= np.linalg.norm(vectors, axis=1, keepdims=True).clip(min=1e-12)
+    order = np.argsort(-(vectors @ prototype))[:top_k]
+    return [comments[i] for i in order]       # review queue, not auto-delete
+
+
+def draft_changelog(commits, classify, summarize):
+    sections = {}
+    for commit in commits:
+        kind = classify(commit["message"])
+        sections.setdefault(kind, []).append(summarize(commit))
+    return "\n".join(
+        f"## {kind}\n" + "\n".join(f"- {item}" for item in items)
+        for kind, items in sorted(sections.items())
+    )

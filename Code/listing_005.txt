@@ -1,0 +1,5 @@
+1. Read the behavior contract
+2. Read tasks/lessons.md
+3. Read specs/*
+4. Read tasks/fix_plan.md
+5. Inspect the current Git state

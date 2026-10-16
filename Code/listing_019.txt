@@ -1,0 +1,6 @@
+cat tasks/fix_plan.md
+cat tasks/lessons.md
+cat tasks/todo.md
+git status
+git log --oneline -10
+git diff main...HEAD

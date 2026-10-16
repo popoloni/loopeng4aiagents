@@ -1,0 +1,22 @@
+def resolve_ticket(ticket, retrieve, draft, verify, authorize,
+                   execute_action, handoff, max_retries=2):
+    evidence = retrieve(ticket)
+    feedback = None
+
+    for _ in range(max_retries + 1):
+        response, action = draft(ticket, evidence, feedback)
+        passed, feedback = verify(ticket, response, action, evidence)
+        if not passed:
+            continue
+
+        if action is None:
+            return {"state": "resolved", "response": response}
+        if not authorize(ticket, action):
+            return handoff(ticket, evidence, response, action)
+
+        confirmation = execute_action(action)
+        if confirmation.get("confirmed"):
+            return {"state": "resolved", "response": response,
+                    "confirmation": confirmation}
+
+    return handoff(ticket, evidence, None, None)

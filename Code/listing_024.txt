@@ -1,0 +1,3 @@
+npm config set allow-scripts=@anthropic-ai/claude-code --location=user
+npm install -g @anthropic-ai/claude-code
+npm install -g @musistudio/claude-code-router

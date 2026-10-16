@@ -1,0 +1,9 @@
+class LoopMode(ABC):
+    def next_task(self):
+        """Return the next task, or None when no work is available."""
+
+    def on_result(self, task, outcome, state):
+        """Interpret OK, VERIFY_FAILED, TIMEOUT, AGENT_ERROR, and policy outcomes."""
+
+    def on_incomplete(self, task, executor_type):
+        """Handle a task that has exhausted its permitted recovery path."""

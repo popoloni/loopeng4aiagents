@@ -1,0 +1,5 @@
+cd ~/local-llm-workspace
+mkdir -p prj/my_project
+cd prj/my_project
+git init
+mkdir -p .claude/plans

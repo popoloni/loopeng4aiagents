@@ -1,0 +1,15 @@
+def classify_ci_failure(run_test, runs=5):
+    outcomes = [bool(run_test()) for _ in range(runs)]
+    if all(not outcome for outcome in outcomes):
+        return "real_failure"
+    if any(outcomes) and not all(outcomes):
+        return "flake"
+    return "passing"
+
+
+def ci_sweeper(run_test, repair):
+    diagnosis = classify_ci_failure(run_test)
+    if diagnosis != "real_failure":
+        return {"state": "report_only", "diagnosis": diagnosis}
+    return {"state": "candidate_patch", "diagnosis": diagnosis,
+            "patch": repair()}

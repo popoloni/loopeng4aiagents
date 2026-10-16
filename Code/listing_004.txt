@@ -1,0 +1,5 @@
+## Lesson 7 -- Use pnpm, never npm
+**What happened**: npm install rewrote the lockfile.
+**Root cause**: The package manager was inferred rather than read.
+**Rule**: Use pnpm for every dependency and script command in this repo.
+**Date**: 2026-07-16

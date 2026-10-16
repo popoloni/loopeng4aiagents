@@ -1,0 +1,17 @@
+# Fix Plan
+
+## Items
+
+- [ ] Add greeting utility
+  - Create src/utils/greeting.ts
+  - Export greet(name: string): string
+  - Return "Hello, {name}!"
+  - Cover normal and empty-string inputs
+  - Quality gate: npm run typecheck && npm test
+
+- [ ] Add farewell utility
+  - Extend the existing utility module
+  - Export farewell(name: string): string
+  - Return "Goodbye, {name}!"
+  - Add unit tests
+  - Quality gate: npm run typecheck && npm test

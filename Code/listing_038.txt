@@ -1,0 +1,20 @@
+{
+  "verification_plugins": {
+    "python_lint": {
+      "command": "ruff check {file}",
+      "when": "task",
+      "languages": [".py"],
+      "on_failure": "fail"
+    },
+    "typecheck": {
+      "command": "mypy src",
+      "when": "plan_complete",
+      "on_failure": "fail"
+    },
+    "suite": {
+      "command": "pytest -x",
+      "when": "plan_complete",
+      "on_failure": "fail"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+project/
+|-- AGENTS.md
+|-- specs/
+|   `-- feature-specification.md
+|-- tasks/
+|   |-- fix_plan.md
+|   |-- lessons.md
+|   |-- todo.md
+|   `-- ralph_prompt.md
+|-- scripts/
+|   `-- ralph/
+|       |-- ralph.sh
+|       `-- CLAUDE.md
+|-- src/
+|-- tests/
+`-- .git/

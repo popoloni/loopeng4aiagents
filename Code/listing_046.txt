@@ -1,0 +1,21 @@
+import re
+
+
+def _code_block(text):
+    blocks = re.findall(r"```(?:python)?\s*\n(.*?)```", text, re.DOTALL)
+    return blocks[-1].strip() if blocks else ""
+
+
+def react_solve(question, complete, run_tool, max_steps=4):
+    transcript = f"Question: {question}\n"
+
+    for _ in range(max_steps):
+        reply = complete(transcript)
+        if "FINAL:" in reply:
+            return reply.split("FINAL:", 1)[1].strip().splitlines()[0]
+
+        code = _code_block(reply)
+        observation = run_tool(code) if code else "no runnable action"
+        transcript += f"{reply}\nTOOL OUTPUT:\n{observation}\n"
+
+    raise RuntimeError("tool loop ended without a FINAL answer")

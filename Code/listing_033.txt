@@ -1,0 +1,17 @@
+{
+  "dev_root": "./prj/my_project",
+  "plan_file": "./prj/my_project/.claude/plans/plan.json",
+  "local_host": "127.0.0.1",
+  "inference_port": 8787,
+  "headroom_port": 8789,
+
+  "permission_mode": "acceptEdits",
+  "agent_tools": ["Read", "Edit"],
+  "max_turns": 150,
+  "timeout_seconds": 3600,
+  "max_retries": 3,
+  "max_resumes": 8,
+  "size_threshold_bytes": 12000,
+
+  "backend_stability_profile": "balanced"
+}

@@ -1,0 +1,30 @@
+import numpy as np
+
+
+class EmbeddingMemory:
+    def __init__(self, encode):
+        self.encode = encode
+        self.documents = []
+        self.metadata = []
+        self.vectors = None
+
+    def add(self, documents, metadata=None):
+        self.documents.extend(documents)
+        self.metadata.extend(metadata or [None] * len(documents))
+
+    def index(self):
+        vectors = np.asarray(self.encode(self.documents), dtype=np.float32)
+        norms = np.linalg.norm(vectors, axis=1, keepdims=True).clip(min=1e-12)
+        self.vectors = vectors / norms
+
+    def retrieve(self, query, top_k=3):
+        if self.vectors is None:
+            self.index()
+        vector = np.asarray(self.encode([query])[0], dtype=np.float32)
+        vector /= max(np.linalg.norm(vector), 1e-12)
+        order = np.argsort(-(self.vectors @ vector))[:top_k]
+        return [
+            {"document": self.documents[i], "metadata": self.metadata[i],
+             "score": float(self.vectors[i] @ vector)}
+            for i in order
+        ]

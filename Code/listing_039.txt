@@ -1,0 +1,13 @@
+{
+  "task_id": "task_09",
+  "strategy": "preset=safe_repo_edit",
+  "executor_type": "direct",
+  "attempts": 1,
+  "hard_fails": 0,
+  "resumes": 0,
+  "outcome": "OK",
+  "escalated": false,
+  "escalation_reason": "",
+  "duration_s": 12.4,
+  "token_estimate": 310
+}

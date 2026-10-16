@@ -1,0 +1,10 @@
+def guardrail_autoact(change, denylisted_paths,
+                      max_files=10, min_confidence=0.8):
+    touches_denylist = any(
+        change["path"].startswith(path) for path in denylisted_paths
+    )
+    return (
+        not touches_denylist
+        and change["n_files"] <= max_files
+        and change["confidence"] >= min_confidence
+    )

@@ -1,0 +1,21 @@
+def run_until_done(task, make, check, max_attempts=3):
+    """Generate, execute the check, and feed the real failure back."""
+    feedback = None
+    history = []
+    candidate = None
+
+    for attempt in range(1, max_attempts + 1):
+        candidate = make(task, feedback)
+        passed, evidence = check(task, candidate)
+        history.append({
+            "attempt": attempt,
+            "passed": passed,
+            "evidence": evidence,
+        })
+        if passed:
+            return {"solved": True, "candidate": candidate,
+                    "attempts": attempt, "history": history}
+        feedback = evidence
+
+    return {"solved": False, "candidate": candidate,
+            "attempts": max_attempts, "history": history}

@@ -1,0 +1,5 @@
+cd ~/local-llm-workspace
+bash bin/launch_kowalski.bash
+
+# Equivalent explicit command:
+# env/bin/python -m llmstack.cli run

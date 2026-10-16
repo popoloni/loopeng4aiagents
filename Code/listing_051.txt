@@ -1,0 +1,18 @@
+from hashlib import sha256
+from pathlib import Path
+
+
+def tree_digest(paths):
+    digest = sha256()
+    for path in sorted(map(Path, paths), key=str):
+        digest.update(str(path).encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
+def run_protected_verifier(candidate, protected_paths, verifier):
+    before = tree_digest(protected_paths)
+    result = verifier(candidate)
+    if tree_digest(protected_paths) != before:
+        raise PermissionError("protected verifier assets were modified")
+    return result

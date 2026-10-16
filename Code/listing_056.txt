@@ -1,0 +1,23 @@
+def capstone_orchestra(task, plan, implement, check,
+                       sample, checker_score,
+                       retries=3, fallback_samples=4):
+    plan_text = plan(task)
+    feedback = None
+
+    for _ in range(retries):
+        candidate = implement(task, plan_text, feedback)
+        passed, evidence = check(task, candidate)
+        if passed:
+            return candidate
+        feedback = evidence
+
+    candidates = [sample(task, plan_text) for _ in range(fallback_samples)]
+    ranked = sorted(candidates,
+                    key=lambda item: checker_score(task, item),
+                    reverse=True)
+    for candidate in ranked:
+        passed, _ = check(task, candidate)
+        if passed:
+            return candidate
+
+    raise RuntimeError("all verified orchestration stages failed")

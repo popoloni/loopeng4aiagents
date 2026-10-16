@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PLAN="tasks/fix_plan.md"
+PROMPT="tasks/ralph_prompt.md"
+LESSONS="tasks/lessons.md"
+
+for file in "$PLAN" "$PROMPT"; do
+  [ -f "$file" ] || {
+    echo "Missing required file: $file"
+    exit 1
+  }
+done
+
+[ -f "$LESSONS" ] || printf '# Agent Lessons\n' > "$LESSONS"
+
+DONE="$(grep -c '^- \[x\]' "$PLAN" 2>/dev/null || true)"
+OPEN="$(grep -c '^- \[ \]' "$PLAN" 2>/dev/null || true)"
+
+DONE="${DONE:-0}"
+OPEN="${OPEN:-0}"
+
+echo "Completed: $DONE"
+echo "Remaining: $OPEN"
+
+if [ "$OPEN" -eq 0 ]; then
+  echo "All plan items are complete."
+  exit 0
+fi
+
+echo "Next item:"
+grep '^- \[ \]' "$PLAN" | head -1 | sed 's/^/  /'
+
+if command -v pbcopy >/dev/null 2>&1; then
+  pbcopy < "$PROMPT"
+elif command -v xclip >/dev/null 2>&1; then
+  xclip -selection clipboard < "$PROMPT"
+elif command -v xsel >/dev/null 2>&1; then
+  xsel --clipboard --input < "$PROMPT"
+elif command -v clip >/dev/null 2>&1; then
+  clip < "$PROMPT"
+else
+  echo "No clipboard utility found."
+  echo "Copy the following prompt manually:"
+  cat "$PROMPT"
+fi
+
+echo "Open a NEW agent chat, paste the prompt, and close the chat"
+echo "after the current item is committed."

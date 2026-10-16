@@ -1,0 +1,15 @@
+def maker_checker(task, make, write_checks, run_check):
+    candidate = make(task)
+    checks = list(write_checks(task))
+
+    if not checks:                 # fail closed, never accept without evidence
+        return {"accepted": False, "candidate": candidate,
+                "reason": "checker produced no executable checks"}
+
+    results = [bool(run_check(candidate, check)) for check in checks]
+    return {
+        "accepted": all(results),
+        "candidate": candidate,
+        "checks_passed": sum(results),
+        "checks_total": len(results),
+    }

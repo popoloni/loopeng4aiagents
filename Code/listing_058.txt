@@ -1,0 +1,40 @@
+{
+  "id": "ci-regression-repair",
+  "trigger": "required CI job failed",
+  "scope": {
+    "repository": "payments-api",
+    "paths": ["src/**", "tests/**"],
+    "forbidden": ["infra/prod/**", "secrets/**"]
+  },
+  "classify": {
+    "states": ["flake", "regression", "unknown"],
+    "unknown_action": "escalate"
+  },
+  "context": ["AGENTS.md", "build schema", "test ownership"],
+  "memory": {
+    "collections": ["recent-ci-incidents"],
+    "min_similarity": 0.72,
+    "max_age_days": 90
+  },
+  "tools": ["read", "git_diff", "pytest_selected"],
+  "verification": {
+    "task_gate": "pytest -q <failed-tests>",
+    "integration_gate": "pytest -q",
+    "default": "reject"
+  },
+  "budget": {
+    "max_attempts": 3,
+    "max_tokens": 180000,
+    "max_minutes": 45
+  },
+  "risk": {
+    "auto_apply": ["test-only", "reversible-source-fix"],
+    "escalate": ["dependency", "schema", "security", "unknown"]
+  },
+  "state": {
+    "workspace": "git-worktree",
+    "checkpoint": "commit-after-task-gate",
+    "owner_lease_minutes": 60
+  },
+  "on_failure": "preserve evidence and escalate"
+}

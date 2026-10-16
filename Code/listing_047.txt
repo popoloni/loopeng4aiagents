@@ -1,0 +1,29 @@
+from pathlib import Path
+import subprocess
+import tempfile
+
+
+def _git(repository, *arguments, check=True):
+    return subprocess.run(
+        ["git", "-C", str(repository), *arguments],
+        check=check, text=True, capture_output=True,
+    )
+
+
+def run_in_worktree(repository, task_id, edit):
+    branch = f"loop/{task_id}"
+    path = Path(tempfile.mkdtemp(prefix=f"loop-{task_id}-"))
+    _git(repository, "worktree", "add", "-b", branch, str(path))
+    try:
+        edit(path)
+        _git(path, "add", "-A")
+        _git(path, "commit", "-m", f"complete {task_id}")
+    finally:
+        _git(repository, "worktree", "remove", "--force", str(path),
+             check=False)
+    return branch
+
+
+def integrate_branch(repository, branch):
+    # check=True deliberately surfaces a conflict instead of losing work.
+    _git(repository, "merge", "--no-edit", branch)

@@ -1,0 +1,19 @@
+import numpy as np
+
+
+def semantic_triage(items, urgent_examples, embed, review_limit=20):
+    reference = np.asarray(embed(urgent_examples), dtype=np.float32)
+    prototype = reference.mean(axis=0)
+    prototype /= max(np.linalg.norm(prototype), 1e-12)
+
+    vectors = np.asarray(embed([item["text"] for item in items]),
+                         dtype=np.float32)
+    vectors /= np.linalg.norm(vectors, axis=1, keepdims=True).clip(min=1e-12)
+    scores = vectors @ prototype
+    order = np.argsort(-scores)[:review_limit]
+
+    return [
+        {"id": items[i]["id"], "score": float(scores[i]),
+         "decision": "human_review"}
+        for i in order
+    ]
