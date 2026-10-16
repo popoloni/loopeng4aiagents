@@ -1,0 +1,12 @@
+{
+  "trusted_code": true,
+  "objective": "Implement add(a, b) so it returns the sum of two integers. Define a function named add.",
+  "assertions": [
+    "assert add(2, 3) == 5",
+    "assert add(-1, 1) == 0"
+  ],
+  "max_attempts": 3,
+  "max_seconds": 90,
+  "max_tokens": 5000,
+  "escalation_owner": "human"
+}

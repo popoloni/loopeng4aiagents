@@ -1,0 +1,9 @@
+# Relationship to the agentic loop engineering course
+
+The final chapter, **Choosing the Right Loop**, takes inspiration from Fareed Khan's independent [*Agentic Loop Engineering: Executed and Measured*](https://github.com/FareedKhan-dev/agentic-loop-engineering-course) and the associated [article](https://medium.com/@fareedkhandev/optimizing-agentic-system-using-loop-engineering-7966adad5835). The course is not a Packt or Enrico Papalini project.
+
+Its 18 notebooks begin with a measurement foundation, isolate loop primitives, examine production patterns, and end with an orchestration capstone. The book's contribution is a practitioner-facing decision model: choose controls in response to observed failure modes, weigh quality against cost, and distinguish verification from permission to act. This repository supplies the book's compact pedagogical listings, figures, and a standalone standard-library implementation. That script was informed by the course's shared loop, scoring, tool, memory, and local-model interfaces; it does **not** mirror the course's notebooks, data, model outputs, or evaluation harness.
+
+If you want to reproduce a reported number, go to the original course and inspect its notebook, dataset, scorer, saved result, model, and hardware requirements. The reported effects are observations from those particular experiments, not universal performance guarantees. When adapting a technique to another project, establish a failing baseline, validate the verifier, and measure both quality and operating cost on local tasks.
+
+Suggested reading path: book chapter 6 for control selection → the course [README and curriculum](https://github.com/FareedKhan-dev/agentic-loop-engineering-course#readme) for the corresponding measured notebook → the original notebook and `results/` data for methodological detail.

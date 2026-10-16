@@ -1,0 +1,15 @@
+{
+  "trusted_code": true,
+  "objective": "Implement add(a, b) correctly",
+  "assertions": [
+    "assert add(2, 3) == 5",
+    "assert add(-1, 1) == 0"
+  ],
+  "candidates": [
+    "def add(a, b):\n    return a - b",
+    "def add(a, b):\n    return a + b"
+  ],
+  "max_attempts": 2,
+  "max_seconds": 15,
+  "escalation_owner": "human"
+}
