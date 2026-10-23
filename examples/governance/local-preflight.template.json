@@ -1,0 +1,70 @@
+{
+  "template_version": 1,
+  "record_status": "unfilled_not_approved",
+  "run_id": null,
+  "operator": null,
+  "checked_at": null,
+  "contract_revision": null,
+  "runtime": {
+    "os_and_hardware": null,
+    "runtime_version": null,
+    "model_identifier": null,
+    "artifact_hashes_and_licenses": [],
+    "configuration_revision": null,
+    "rollback_configuration_uri": null
+  },
+  "route": {
+    "actual_hops": [],
+    "expected_model_identity": null,
+    "observed_model_identity": null,
+    "health_evidence_uri": null,
+    "disposable_completion_evidence_uri": null,
+    "correlation_id": null,
+    "egress_controls_and_observations": null,
+    "cloud_credentials_absent_from_worker": null,
+    "telemetry_plugins_and_update_policy": null
+  },
+  "workspace": {
+    "root": null,
+    "git_baseline": null,
+    "clean_or_explicitly_isolated": null,
+    "plan_parse_result": null,
+    "baseline_tests_evidence_uri": null,
+    "os_isolation_evidence_uri": null,
+    "secret_exclusion_evidence_uri": null,
+    "protected_verifier_hashes": [],
+    "worker_cannot_write_verifiers": null,
+    "state_and_logs_survive_rollback": null
+  },
+  "capacity": {
+    "free_disk_bytes": null,
+    "available_memory_bytes": null,
+    "measured_peak_memory_bytes": null,
+    "warning_threshold_bytes": null,
+    "halt_threshold_bytes": null,
+    "threshold_evidence_uri": null,
+    "stability_profile": null
+  },
+  "deadlines": {
+    "model_seconds": null,
+    "proxy_seconds_if_used": null,
+    "router_seconds_if_used": null,
+    "harness_seconds": null,
+    "supervisor_seconds": null,
+    "nested_deadline_check": null
+  },
+  "recovery": {
+    "retry_resume_and_total_budgets_enforced": null,
+    "checkpoint_restore_drill_evidence_uri": null,
+    "shutdown_procedure_uri": null,
+    "escalation_owner_available": null,
+    "exception_queue_within_capacity": null
+  },
+  "gate": {
+    "result": "not_evaluated",
+    "unresolved_checks": [],
+    "not_applicable_checks_with_reason": [],
+    "reviewed_by": null,
+    "admission_authorization_uri": null
+  }
+}

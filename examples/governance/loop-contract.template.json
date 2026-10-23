@@ -1,0 +1,85 @@
+{
+  "template_version": 1,
+  "record_status": "unfilled_not_approved",
+  "loop_id": null,
+  "accountable_owner": null,
+  "durable_intent": {
+    "objective": null,
+    "specification_uri": null,
+    "specification_revision": null,
+    "acceptance_criteria": [],
+    "invariants": [],
+    "non_goals": []
+  },
+  "external_state": {
+    "plan_uri": null,
+    "run_state_uri": null,
+    "evidence_store_uri": null,
+    "failure_log_uri": null,
+    "retention_days": null,
+    "readers": []
+  },
+  "bounded_work": {
+    "unit_of_work": null,
+    "workspace_root": null,
+    "allowed_write_paths": [],
+    "max_changed_files": null,
+    "isolation_mechanism": null,
+    "reversibility_evidence_uri": null
+  },
+  "protected_evidence": {
+    "verifier_owner": null,
+    "verifier_artifacts_and_hashes": [],
+    "worker_write_protection": null,
+    "required_checks": [],
+    "known_good_and_bad_calibration_uri": null,
+    "missing_or_failed_required_check": "reject"
+  },
+  "explicit_authority": {
+    "allowed_tools": [],
+    "allowed_data_sources": [],
+    "allowed_network_destinations": [],
+    "allowed_external_effects": [],
+    "denied_paths": [],
+    "credential_scope": null,
+    "enforcement_mechanism": null,
+    "irreversible_action_approver": null,
+    "authorization_record_uri": null
+  },
+  "resource_budgets": {
+    "max_attempts": null,
+    "max_retries": null,
+    "max_resumes": null,
+    "max_tokens": null,
+    "max_elapsed_seconds": null,
+    "max_attempt_seconds": null,
+    "max_cost": null,
+    "currency": null,
+    "enforcement_owner_and_mechanism": null
+  },
+  "recoverable_checkpoints": {
+    "accepted_baseline": null,
+    "checkpoint_location": null,
+    "state_outside_rollback_boundary": null,
+    "partial_work_validation": null,
+    "recovery_procedure_uri": null,
+    "recovery_drill_evidence_uri": null
+  },
+  "terminal_escalation": {
+    "stop_when": [],
+    "owner": null,
+    "backup_owner": null,
+    "handoff_channel": null,
+    "response_target_minutes": null,
+    "evidence_package_uri": null,
+    "on_missing_authority_or_evidence": "halt_for_review"
+  },
+  "lifecycle": {
+    "review_date": null,
+    "expiry_date": null,
+    "retirement_condition": null,
+    "approval_status": "not_requested",
+    "approved_by": null,
+    "approved_at": null
+  }
+}

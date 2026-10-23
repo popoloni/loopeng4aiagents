@@ -192,7 +192,7 @@ def demo() -> int:
         final.write_text("#!/bin/sh\ntest -f result.txt && test \"$(cat result.txt)\" = first,second\n", encoding="utf-8")
         scope.chmod(0o700)
         final.chmod(0o700)
-        worker = Path(__file__).with_name("ralph_demo_worker.py")
+        worker = Path(__file__).with_name("demo_worker.py")
         return run_loop(Config(workspace, prompt, state, (sys.executable, str(worker)), scope, final, 3, 10))
 
 

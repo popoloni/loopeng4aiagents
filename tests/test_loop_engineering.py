@@ -10,7 +10,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from src import loop_engineering as le
+from loopeng import engineering as le
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -193,7 +193,7 @@ class LoopMechanismTests(unittest.TestCase):
                          ("verified", 2, "report_only"))
         failed = le.run_code_task({**le.DEMO_TASK, "candidates": le.DEMO_TASK["candidates"][:1]})
         self.assertEqual(failed["state"], "escalated")
-        proc = subprocess.run([sys.executable, str(ROOT / "src" / "loop_engineering.py"), "--demo"],
+        proc = subprocess.run([sys.executable, str(ROOT / "loopeng/__main__.py"), "engineering", "--demo"],
                               capture_output=True, text=True, check=False)
         self.assertEqual(proc.returncode, 0, proc.stderr)
         self.assertEqual(json.loads(proc.stdout)["state"], "verified")
@@ -211,7 +211,7 @@ class LoopMechanismTests(unittest.TestCase):
 
         generator = le.VLLMGenerator("http://127.0.0.1:8000/v1/chat/completions",
                                     "local-test-model", token_budget=50)
-        with patch("src.loop_engineering.urlopen", side_effect=fake_urlopen):
+        with patch("loopeng.engineering.urlopen", side_effect=fake_urlopen):
             result = le.run_code_task({key: value for key, value in le.DEMO_TASK.items()
                                        if key != "candidates"}, generator=generator)
         self.assertEqual(result["state"], "verified")
@@ -220,7 +220,7 @@ class LoopMechanismTests(unittest.TestCase):
 
     def test_local_model_failure_escalates_without_executing_code(self):
         generator = le.VLLMGenerator("http://127.0.0.1:8000/v1/chat/completions", "local-test-model")
-        with patch("src.loop_engineering.urlopen", side_effect=OSError("server unavailable")):
+        with patch("loopeng.engineering.urlopen", side_effect=OSError("server unavailable")):
             result = le.run_code_task({key: value for key, value in le.DEMO_TASK.items()
                                        if key != "candidates"}, generator=generator)
         self.assertEqual(result["state"], "escalated")

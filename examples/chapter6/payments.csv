@@ -1,0 +1,6 @@
+payment_id,status,currency,cents
+p1,settled,EUR,1200
+p2,settled,EUR,800
+p3,pending,EUR,900
+p4,settled,USD,500
+p5,refunded,EUR,300

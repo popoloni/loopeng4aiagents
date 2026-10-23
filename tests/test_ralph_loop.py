@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from src.ralph_loop import Config, demo, read_items, run_loop
+from loopeng.ralph.controller import Config, demo, read_items, run_loop
 
 
 class RalphLoopTests(unittest.TestCase):
@@ -72,9 +72,9 @@ if mode == 'fail_after_one':
         self.assertEqual((self.workspace / "result.txt").read_text(), "a,b")
 
     def test_cli_accepts_external_worker_and_verifiers(self) -> None:
-        script = Path(__file__).resolve().parents[1] / "src/ralph_loop.py"
+        script = Path(__file__).resolve().parents[1] / "loopeng/__main__.py"
         result = subprocess.run([
-            sys.executable, str(script), "--workspace", str(self.workspace),
+            sys.executable, str(script), "ralph", "--workspace", str(self.workspace),
             "--prompt", str(self.prompt), "--state", str(self.state),
             "--worker", sys.executable, "--worker-arg", str(self.worker),
             "--worker-arg", "one", "--scope-verifier", str(self.scope),

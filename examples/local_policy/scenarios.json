@@ -1,0 +1,167 @@
+[
+  {
+    "name": "verified_change",
+    "task": {
+      "file": "src/tokenizer.py",
+      "mode": "direct",
+      "context": [
+        "src/tokenizer.py"
+      ]
+    },
+    "current_size": 800,
+    "gate_results": {
+      "shell": true,
+      "feature_markers": true,
+      "change": true,
+      "wiring": true,
+      "behavior": true,
+      "task_plugins": true,
+      "independent_checker": true,
+      "authorization": true,
+      "plan": true
+    },
+    "outcome": "OK",
+    "authorized": true,
+    "usable_progress": false,
+    "budget": {
+      "max_attempts": 3,
+      "max_retries": 2,
+      "max_resumes": 1,
+      "max_seconds": 90,
+      "attempts_used": 1,
+      "elapsed_seconds": 10
+    }
+  },
+  {
+    "name": "failed_behavior",
+    "task": {
+      "file": "src/tokenizer.py",
+      "mode": "direct",
+      "context": [
+        "src/tokenizer.py"
+      ]
+    },
+    "current_size": 800,
+    "gate_results": {
+      "shell": true,
+      "feature_markers": true,
+      "change": true,
+      "wiring": true,
+      "behavior": false,
+      "task_plugins": true,
+      "independent_checker": true,
+      "authorization": true,
+      "plan": true
+    },
+    "outcome": "VERIFY_FAILED",
+    "authorized": true,
+    "usable_progress": false,
+    "budget": {
+      "max_attempts": 3,
+      "max_retries": 2,
+      "max_resumes": 1,
+      "max_seconds": 90,
+      "attempts_used": 1,
+      "elapsed_seconds": 10
+    }
+  },
+  {
+    "name": "timeout_progress",
+    "task": {
+      "file": "src/tokenizer.py",
+      "mode": "direct",
+      "context": [
+        "src/tokenizer.py"
+      ]
+    },
+    "current_size": 800,
+    "gate_results": {
+      "shell": true,
+      "feature_markers": true,
+      "change": true,
+      "wiring": true,
+      "behavior": true,
+      "task_plugins": true,
+      "independent_checker": true,
+      "authorization": true,
+      "plan": true
+    },
+    "outcome": "TIMEOUT",
+    "authorized": true,
+    "usable_progress": true,
+    "budget": {
+      "max_attempts": 3,
+      "max_retries": 2,
+      "max_resumes": 1,
+      "max_seconds": 90,
+      "attempts_used": 1,
+      "elapsed_seconds": 10
+    }
+  },
+  {
+    "name": "unauthorized_change",
+    "task": {
+      "file": "src/tokenizer.py",
+      "mode": "direct",
+      "context": [
+        "src/tokenizer.py"
+      ]
+    },
+    "current_size": 800,
+    "gate_results": {
+      "shell": true,
+      "feature_markers": true,
+      "change": true,
+      "wiring": true,
+      "behavior": true,
+      "task_plugins": true,
+      "independent_checker": true,
+      "authorization": false,
+      "plan": true
+    },
+    "outcome": "VERIFY_FAILED",
+    "authorized": false,
+    "usable_progress": false,
+    "budget": {
+      "max_attempts": 3,
+      "max_retries": 2,
+      "max_resumes": 1,
+      "max_seconds": 90,
+      "attempts_used": 1,
+      "elapsed_seconds": 10
+    }
+  },
+  {
+    "name": "budget_spent",
+    "task": {
+      "file": "src/tokenizer.py",
+      "mode": "direct",
+      "context": [
+        "src/tokenizer.py"
+      ]
+    },
+    "current_size": 800,
+    "gate_results": {
+      "shell": true,
+      "feature_markers": true,
+      "change": true,
+      "wiring": true,
+      "behavior": false,
+      "task_plugins": true,
+      "independent_checker": true,
+      "authorization": true,
+      "plan": true
+    },
+    "outcome": "VERIFY_FAILED",
+    "authorized": true,
+    "usable_progress": false,
+    "budget": {
+      "max_attempts": 3,
+      "max_retries": 2,
+      "max_resumes": 1,
+      "max_seconds": 90,
+      "attempts_used": 3,
+      "elapsed_seconds": 10
+    }
+  }
+]

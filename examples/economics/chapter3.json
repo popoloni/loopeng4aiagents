@@ -1,0 +1,38 @@
+{
+  "hypothetical": true,
+  "assumptions": [
+    "Chapter 3 regulated maintenance case; illustrative assumptions, not live prices or financial advice.",
+    "100 comparable monthly tasks; independent acceptance for a homogeneous bounded cohort.",
+    "Shadow USD prices per million tokens; no separate caching or compaction-call fees specified.",
+    "Compaction retains 6000 additional tokens and fresh context adds 2000 external-state tokens on every turn, including the first.",
+    "The USD128 candidate ledger already includes generation, tools, environments, verification, review, rework, coordination and expected failure exposure; its component split is unspecified.",
+    "Retry probabilities are conditional on prior failures; human escalation costs USD350, distinct from the USD720 end-to-end human baseline.",
+    "Stage capacities share accepted-change units per week; verifier benefits and cost share a quarterly period.",
+    "Sensitivity points other than 68 percent, 30 percent, USD20000 and USD80000 are illustrative sweep points."
+  ],
+  "monthly_tasks": 100,
+  "context": {
+    "turns": 40,
+    "static_tokens": 18000,
+    "history_tokens": 3000,
+    "output_tokens": 900,
+    "input_per_million": 3,
+    "output_per_million": 15,
+    "compact_tokens": 6000,
+    "external_state_tokens": 2000
+  },
+  "outcome": {"candidate_cost": 128, "acceptance": 0.68, "human_hours": 8, "hourly_rate": 90},
+  "retry": {
+    "human_escalation": 350,
+    "attempts": [
+      {"cost": 75, "success": 0.55},
+      {"cost": 45, "success": 0.45},
+      {"cost": 120, "success": 0.80},
+      {"cost": 120, "success": 0.20}
+    ]
+  },
+  "capacity_before": {"specification": 85, "generation": 110, "verification": 52, "integration": 70, "release": 64, "operations": 75},
+  "capacity_after": {"specification": 85, "generation": 110, "verification": 82, "integration": 70, "release": 64, "operations": 75},
+  "verifier": {"rework_reduction": 28000, "failure_reduction": 52000, "cost": 20000},
+  "sensitivity": {"acceptance_rates": [0.1, 0.3, 0.5, 0.68, 1], "verifier_costs": [20000, 40000, 80000, 100000]}
+}

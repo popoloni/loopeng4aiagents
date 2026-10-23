@@ -1,11 +1,13 @@
 """Deterministic sample worker; the controller starts this afresh per item."""
 
+import argparse
 import json
 import sys
 from pathlib import Path
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    argparse.ArgumentParser(description=__doc__).parse_args(argv)
     _prompt = sys.stdin.read()
     state_path = Path("tasks/state.json")
     state = json.loads(state_path.read_text(encoding="utf-8"))

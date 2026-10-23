@@ -1,0 +1,44 @@
+{
+  "sql": {
+    "question": "Which customers have at least two paid orders? Return customer and paid total in cents, sorted by customer.",
+    "schema": "CREATE TABLE orders (id INTEGER PRIMARY KEY, customer TEXT, status TEXT, cents INTEGER);",
+    "rows": [[1,"Ada","paid",1200],[2,"Ada","paid",800],[3,"Ben","paid",500],[4,"Ben","cancelled",900],[5,"Cy","paid",300],[6,"Cy","paid",300]],
+    "baseline": "SELECT customer, SUM(amount) FROM purchases GROUP BY customer",
+    "candidate": "SELECT customer, SUM(cents) FROM orders WHERE status = 'paid' GROUP BY customer HAVING COUNT(*) >= 2 ORDER BY customer"
+  },
+  "memory": [
+    {"text":"Payments incident retry policy uses idempotency keys before retrying refunds.","source":"incident/42","age_days":12,"access":"support"},
+    {"text":"Payments incident retry policy permits unlimited refunds.","source":"incident/old","age_days":120,"access":"support"},
+    {"text":"Payments incident retry policy includes private customer credentials.","source":"private/1","age_days":1,"access":"restricted"}
+  ],
+  "issues": [
+    {"id":"BUG-1","text":"Production outage: payment writes lost; customers cannot pay","owner":"payments","impact":"checkout unavailable"},
+    {"id":"BUG-2","text":"Production outage payment writes lost during restart","owner":"storage","impact":"possible data loss"},
+    {"id":"BUG-3","text":"Change button colour in settings","owner":"ui","impact":"cosmetic"}
+  ],
+  "updates": [
+    {"name":"format-helper","tier":"patch","severity":"none","denylisted":false,"green":true,"provenance_verified":true,"license_approved":true,"reversible":true,"authorized":true},
+    {"name":"payments-sdk","tier":"major","severity":"high","denylisted":true,"green":true,"provenance_verified":true,"license_approved":true,"reversible":true,"authorized":true},
+    {"name":"unknown-origin","tier":"patch","severity":"none","green":true}
+  ],
+  "prs": [
+    {"id":"PR-1","head":"abc","required":["unit","integration"],"checks":{"unit":{"head":"abc","state":"passed"},"integration":{"head":"abc","state":"passed"}},"review":{"head":"abc","state":"approved"}},
+    {"id":"PR-2","head":"def","required":["unit","integration"],"checks":{"unit":{"head":"old","state":"passed"},"integration":{"head":"def","state":"failed"}},"review":{"head":"def","state":"approved"}}
+  ],
+  "debt": [
+    {"id":"D-1","text":"Temporary workaround; remove after migration","age_days":95,"owner":"storage","obsolete_verified":true},
+    {"id":"D-2","text":"Temporary workaround still required by clients","age_days":5,"owner":"api","obsolete_verified":false}
+  ],
+  "commits": [
+    {"id":"c1","message":"fix: prevent duplicate billing on retry","merged":true},
+    {"id":"c2","message":"feat: export payment reconciliation report","merged":true},
+    {"id":"c3","message":"feat: experimental refund engine","merged":false}
+  ],
+  "support": {
+    "id":"T-42","authenticated":true,"request":"refund","human_requested":false,
+    "risk":null,"renewal":"2026-10-01T08:15:00+00:00","cancellation":"2026-10-01T08:42:00+00:00",
+    "charge_cents":2900,"payment_status":"settled","account":"acct-42","charge":"charge-42",
+    "policy":{"source":"refund-policy/v3","approved":true,"current":true,"grace_hours":24},
+    "sources":["subscription/acct-42","billing/charge-42","refund-policy/v3"]
+  }
+}

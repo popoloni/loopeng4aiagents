@@ -1,0 +1,61 @@
+{
+  "template_version": 1,
+  "record_status": "unfilled_not_observed",
+  "run_id": null,
+  "task_id": null,
+  "started_at": null,
+  "ended_at": null,
+  "accountable_owner": null,
+  "intent": {"contract_uri": null, "revision": null, "task_boundary": null},
+  "authority": {
+    "risk_tier": null,
+    "granted_scope": [],
+    "authorization_record_uri": null,
+    "authorization_status": "not_granted"
+  },
+  "versions": {
+    "model_artifact_and_hash": null,
+    "runtime": null,
+    "harness": null,
+    "tools": [],
+    "policy_revision": null,
+    "verifier_hashes": [],
+    "configuration_revision": null
+  },
+  "context_sources_and_access_decisions": [],
+  "actions_and_external_operation_ids": [],
+  "artifacts_changed": [],
+  "accepted_baseline_before": null,
+  "candidate_revision": null,
+  "verification": {
+    "criteria": [],
+    "checks_with_command_exit_code_output_uri_and_time": [],
+    "scope_check_result": null,
+    "plan_suite_result": null,
+    "advisory_review": null,
+    "acceptance_status": "not_evaluated"
+  },
+  "attempts_failures_and_feedback": [],
+  "human_interventions_and_waivers": [],
+  "consumption": {
+    "attempts": null,
+    "resumes": null,
+    "elapsed_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "token_counting_method": null,
+    "cost": null,
+    "currency": null,
+    "human_review_minutes": null
+  },
+  "disposition": {
+    "status": "not_decided",
+    "allowed_final_values": ["accepted", "rejected", "rolled_back", "escalated"],
+    "reason": null,
+    "decided_by": null,
+    "decided_at": null,
+    "accepted_baseline_after": null,
+    "escalation_record_uri": null
+  },
+  "retention": {"store_uri": null, "access_policy": null, "delete_after": null, "redaction_review": null}
+}
